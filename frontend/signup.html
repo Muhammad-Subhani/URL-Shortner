@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | Shortenly</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Shortenly</a>
+        <div class="nav-links">
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card animate-up">
+            <h2>Join Shortenly</h2>
+            <p class="subtitle">Start shortening and tracking your links today.</p>
+            
+            <form id="signup-form">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="name" placeholder="John Doe" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="email" placeholder="john@example.com" required>
+                </div>
+                
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Min. 8 characters" required>
+                    <div class="password-strength">
+                        <div class="bar"></div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-glow">Create Account</button>
+            </form>
+
+            <div class="auth-footer">
+                <p>By signing up, you agree to our <strong>Terms of Service</strong>.</p>
+            </div>
+        </div>
+    </div>
+    <!-- <script src="./auth.js"></script> -->
+     <script>
+    const signup_btn = document.getElementById("signup-form");
+    signup_btn.addEventListener("submit" , async (e)=> {
+        e.preventDefault();
+        const s0_name = document.getElementById("name");
+        const s_name = s0_name.value;
+        const s0_email = document.getElementById("email");
+        const s_email = s0_email.value;
+        const s0_password = document.getElementById("password");
+        const s_password = s0_password.value;
+        const res = await fetch("/signup" , {
+            method : "POST",
+            headers : {'content-type' :'application/json'},
+            body : JSON.stringify({name:s_name , email : s_email , password : s_password
+            })
+        });
+     const response = await res.json();
+     if (response.success) {
+     window.location.href = "/index.html";
+     }
+      if(response.msg){
+        document.querySelector(".auth-footer").innerHTML = `
+        <p>
+            ${response.msg}
+            </p>
+        `
+     }
+    })
+     </script>
+</body>
+</html>

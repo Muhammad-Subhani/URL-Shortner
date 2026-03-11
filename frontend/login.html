@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Shortenly</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Shortenly</a>
+        <div class="nav-links">
+            <a href="signup.html">Sign Up</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <h2>Welcome Back</h2>
+            <p style="color: #636e72; margin-bottom: 2rem;">Log in to manage your custom links.</p>
+            
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="name@company.com" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                
+                <button type="submit" id="login-btn">Sign In</button>
+            </form>
+
+            <div class="auth-footer" style="margin-top: 20px; font-size: 0.9rem;">
+                <p>Don't have an account? <a href="/signup" style="color: var(--primary); text-decoration: none; font-weight: 600;">Create one</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script src="./auth.js"></script> -->
+    <script>
+        const btn = document.getElementById("login-form"); // getting the form on which we are going to apply function
+        btn.addEventListener("submit" ,async (e)=>{
+              e.preventDefault();//prevents the browser to reload 
+            //getting values of email and password
+            const l0_email = document.getElementById("email");
+            const l_email = l0_email.value;
+            const l0_password = document.getElementById("password");
+            const l_password =l0_password.value;
+            try {
+                const res = await fetch("/signup/login" , {
+                    method : "POST",
+                   headers: { 'Content-Type': 'application/json' },//telling that data being parsed is of json 
+                   body : JSON.stringify({email :l_email , password :l_password}) // for parsing data we had to convert it into string
+                });
+                try {
+    const info = await res.json();
+    console.log("Parsed JSON Info:", info); // This is what you're looking for
+    
+    if (info.success) {
+        window.location.href = "/index.html";
+    }
+} catch (err) {
+    console.error("JSON Parsing failed! The server might be sending HTML instead of JSON.");
+    // Log the text to see what the server actually sent
+    const text = await res.text();
+    console.log("Server sent this instead of JSON:", text);
+}
+            } 
+            catch (error) {
+               console.log(error);
+            }
+        });
+
+    </script>
+</body>
+</html>

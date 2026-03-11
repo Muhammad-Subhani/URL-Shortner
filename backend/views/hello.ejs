@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table{
+        border: 1px solid black;
+    }
+    th{
+        border: 1px solid black;
+    }
+    td{
+        border: 1px solid black;
+    }
+</style>
+<body>
+<h1>SHORT URL GENERATOR</h1>
+<form method="post" action="/urlgive">
+    <label > Enter a Valid Url</label>
+    <input type="text" name="url" placeholder="https://exampel.com">
+    <button type="submit">Generate</button>
+</form>
+
+<% if (locals.id) { %>
+ <p> Generated the url : http://localhost:8001/urlgive/<%= id %> </p>
+<% } %>
+<% if (locals.msg) { %>
+ <p><%= msg %></p>
+<% } %>
+ 
+<% if (locals.info) { %>
+ <table>
+    <Thead>
+        <th>Actual Url</th>
+        <th>shorted url</th>
+        <th>Times Opened</th>
+    </Thead>
+    <Tbody>
+        <% info.forEach(user => { %>
+         <tr>
+            <td><%= user.redirecturl %></td>
+            <td> http:localhost:8001/urlgive/<%= user.shorturl %></td>
+            <td><%= user.history.length %></td>
+            
+         </tr>
+        <% }) %>
+    </Tbody>
+ </table>
+<% } %>
+</body>
+</html>

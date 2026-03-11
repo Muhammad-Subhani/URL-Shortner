@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shortenly | Dashboard</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Shortenly</a>
+        <div class="nav-links">
+            <span id="user-display" style="margin-right: 15px; font-size: 0.9rem; font-weight: 600;"></span>
+            <a href="login.html">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container main-layout">
+        <div class="card shadow-lg">
+            <h1>Shorten Link</h1>
+            <p class="subtitle">Enter your email and the long URL below.</p>
+            
+            <form id="shorten-form">
+
+
+                <div class="input-group">
+                    <label for="long-url">Destination URL</label>
+                    <input type="url" id="long-url" placeholder="https://very-long-link.com/path/to/resource" required>
+                </div>
+                
+                <button type="submit" id="shorten-btn" class="btn-primary">Shorten Now</button>
+            </form>
+        </div>
+
+        <div>
+            <p id="result"></p>
+        </div>
+        <div class="history-container">
+            <div class="history-header">
+                <h3>Your Recent Links</h3>
+                <span id="link-count" class="badge">0 Links</span>
+            </div>
+            
+            <div class="table-wrapper">
+                <table id="history-table">
+                    <thead>
+                        <tr>
+                            <th>Original Link</th>
+                            <th>Short Link</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-body">
+                        <!-- <tr id="no-data">
+                            <td colspan="3" style="text-align: center; padding: 40px; color: #a0aec0;">
+                                No links shortened yet. Start above!
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="./main.js"></script>
+</body>
+</html>
